@@ -1,0 +1,9 @@
+#error-message {
+  color: red;
+  font-weight: bolder;
+}
+
+#empty-result {
+  color: red;
+  font-weight: bolder;
+}
