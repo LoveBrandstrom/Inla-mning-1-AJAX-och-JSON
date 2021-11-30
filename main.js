@@ -1,11 +1,12 @@
 let recipeTags = document.getElementById('recipe-tags');
-let recipeItem = document.getElementById('item-list');
+let recipeItems = document.getElementById('recipe-items');
 let errorMessage = document.getElementById('error-message');
-let emptyResult = document.getElementById('empty-result');
 
 const endpointURL = "https://tasty.p.rapidapi.com"
 
 async function fetchRecipeTags() {
+  document.getElementById('recipe-tags').innerHTML = "Loading...";
+  
   try {
     let response = await fetch(endpointURL + "/tags/list", {
       "method": "GET",
@@ -19,14 +20,16 @@ async function fetchRecipeTags() {
 
     let tagsHTML = "";
 
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 21; i++) {
       const displayName = data.results[i].display_name
       const name = data.results[i].name
 
       tagsHTML +=
-        `<label>
-          <input type="radio" id="tag" name="tag" value="${displayName}" onclick="fetchRecipes('${name}')">${displayName}</input>
-        </label>`
+        `<div class="input-wrapper">
+          <label>
+            <input type="radio" id="tag" name="tag" value="${displayName}" onclick="fetchRecipes('${name}')">${displayName}</input>
+          </label>
+        </div>`
     }
 
     recipeTags.innerHTML = tagsHTML;
@@ -36,9 +39,9 @@ async function fetchRecipeTags() {
 }}
 
 async function fetchRecipes(tag) {
-  try {
-    document.querySelector(`input[type="radio"][name=tag]:checked`).value
+  document.getElementById('recipe-items').innerHTML = "Loading...";
 
+  try {
     let response = await fetch(endpointURL + "/recipes/list?from=0&size=40&tags=" + tag, {
       "method": "GET",
       "headers": {
@@ -48,18 +51,29 @@ async function fetchRecipes(tag) {
     })
     
     let data = await response.json();
-    console.log(data.results);
 
     const results = data.results
-    if (results > 0) {
-    emptyResult.innerHTML = "Sorry! We have no recipes with that tag available :("
+
+    if (results.length === 0) {
+      document.getElementById('empty-result').innerHTML = "Sorry! We have no recipes with that tag available :("
     } else {
 
-    let recipeName = ""
+      let recipeItem = ""
 
-    results.forEach(item => recipeName += `<div>${item.name}</div>`);
+      results.forEach(item => recipeItem +=
+        `<div class="recipe-item-wrapper">
+          <div class="recipe-item-header">
+            <span>${item.country !== "ZZ" ? `From: ${item.country}` : "Unknown origin"}</span>
+            <span>${item.language}</span>
+          </div>
+          <div class="recipe-items-body">
+            <img class="recipe-image" src="${item.thumbnail_url}" />
+          </div>
+          <div class="recipe-name">${item.name}</div>
+          <div class="recipe-description">${item.description ? item.description : "No description was added by the author."}</div>
+          </div>`);
 
-    recipeItem.innerHTML = recipeName
+    recipeItems.innerHTML = recipeItem
     }
     
   } catch (error) {
@@ -68,6 +82,3 @@ async function fetchRecipes(tag) {
 };
 
 fetchRecipeTags();
-
-
-

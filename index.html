@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styling.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@200&family=Quicksand&display=swap" rel="stylesheet">
   <title>Document</title>
 </head>
-
-<body>
+<header>
   <h1>Recipe chooser</h1>
   <h2>Pick one of Tasty's recipes</h2>
+</header>
+<body>
+  <h3>Choose the category of your liking</h3>
   <form name="form-recipe-tags" id="recipe-tags">
+    <div id="loader"></div>
   </form>
-  
-  <div id="item-list">  
+  <hr />
+  <h3>View recipes of your chosen category</h3>
+  <div id="recipe-items">  
+    <div id="error-message" />
+    <div id="empty-result" />
   </div>
-
-  <div id="error-message">
-  </div>
-
-  <div id="empty-result">
-  </div>
-
-  <script src="main.js"></script>
+  <script src="main.js" /></script>
 </body>
-
 </html>

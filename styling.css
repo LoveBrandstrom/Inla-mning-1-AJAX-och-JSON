@@ -1,9 +1,71 @@
+body {
+  font-family: 'Catamaran', sans-serif;
+}
+
+header {
+  font-family: 'Quicksand', sans-serif;
+}
+
 #error-message {
-  color: red;
+  color: tomato;
   font-weight: bolder;
 }
 
 #empty-result {
-  color: red;
+  color: gray;
   font-weight: bolder;
+}
+
+#recipe-tags {
+  min-height: 255px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#tag {
+  display: inline-block;
+  align-items: center;
+}
+
+#recipe-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.input-wrapper {
+  flex: 1 0 25%; 
+  margin: 5px;
+}
+
+.recipe-item-wrapper {
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.recipe-item-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-transform: uppercase;
+  color: darkgray;
+  margin-bottom: 10px;
+}
+
+.recipe-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+
+.recipe-name {
+  font-weight: bolder;
+  font-size: larger;
+  margin-bottom: 5px;
 }
